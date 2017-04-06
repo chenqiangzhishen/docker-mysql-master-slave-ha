@@ -1,0 +1,70 @@
+
+[mysqld]
+# GENERAL #
+user                           = mysql
+port                           = 13388
+default_storage_engine         = InnoDB
+socket                         = /var/run/mysqld/mysqld.sock
+pid_file                       = /var/run/mysqld/mysqld.pid
+tmpdir                         = /tmp
+key_buffer_size                = 128M
+myisam_recover                 = FORCE,BACKUP
+max_allowed_packet             = 32M
+max_connect_errors             = 1000000
+datadir                        = /var/lib/mysql
+expire_logs_days               = 7
+#sync_binlog                   = 0
+tmp_table_size                 = 32M
+max_heap_table_size            = 32M
+max_connections                = 5000
+thread_cache_size              = 512
+table_definition_cache         = 4096
+table_open_cache               = 4096
+wait_timeout            = 28800
+interactive_timeout     = 28800
+transaction-isolation = READ-COMMITTED
+binlog-format=row
+character-set-server=utf8
+skip-name-resolve
+back_log=1024
+explicit_defaults_for_timestamp=true
+server_id=161733388
+# INNODB #
+innodb_flush_method            = O_DIRECT
+innodb_data_file_path = ibdata1:100M:autoextend
+#redo log
+innodb_log_files_in_group      = 3
+innodb_log_file_size           = 1G
+#innodb performance
+innodb_flush_log_at_trx_commit = 0
+innodb_file_per_table          = 1
+innodb_buffer_pool_instances   = 8
+innodb_io_capacity             = 2000
+innodb_lock_wait_timeout       = 30
+binlog_error_action = ABORT_SERVER
+innodb_buffer_pool_size        = 8G
+#innodb_buffer_pool_size         = 28M
+innodb_max_dirty_pages_pct=90
+innodb_file_format=Barracuda
+innodb_support_xa=0
+innodb_buffer_pool_dump_at_shutdown = 1
+innodb_buffer_pool_load_at_startup = 1
+
+#log_queries_not_using_indexes  = 1
+gtid_mode=ON
+enforce-gtid-consistency
+log-bin=mysql-bin
+log-slave-updates=1
+master-info-repository=TABLE
+relay-log-info-repository=TABLE
+sync_master_info = 10000
+slave_sql_verify_checksum=1
+skip-slave-start
+init-connect='SET NAMES utf8'
+character-set-server=utf8
+skip-character-set-client-handshake
+bind-address=0.0.0.0
+skip-external-locking
+slave-parallel-workers=6
+lower_case_table_names  = 1
+local_infile = 0
