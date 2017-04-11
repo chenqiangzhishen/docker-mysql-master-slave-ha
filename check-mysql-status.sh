@@ -3,14 +3,11 @@
 # Author owner: chenqiangzhishen@163.com
 
 # This script aim to check mysqld service status.
-# If the mysqld is dead, keepalived should be demoted.
-
-# check the mysql service for three times,
-# if mysql service is really dead, should kill the keepalived.
-
-# the check script will check the following cmd return code,
-# so if true, the keepalived in the node will take effect, or will be demoted.
-# and VIP will shift to slave node.
+# if the mysqld is dead, keepalived should be demoted.
+# keepalived will check the script return code,
+# if true, means the script execute success and the VIP should not shift,
+# if false, means mysqld service in bad status, keepalived should be demoted,
+# and the VIP should shift to slave node.
 sudo netstat -anp | grep 13388 | grep LISTEN > /dev/null 2>&1
 
 # for check_times in `seq 1 3`; do
