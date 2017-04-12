@@ -61,7 +61,7 @@ sudo docker rm -f keepalived > /dev/null 2>&1 | true
 sudo ip a | grep $VIP > /dev/null 2>&1
 [[ $? == 0 ]] && sudo ip a del $VIP dev $INTERFACE > /dev/null 2>&1
 
-sudo docker run --restart=on-failure --log-driver=syslog \
+sudo docker run --restart=on-failure \
      --net=host --privileged=true --name=keepalived \
      --volume=$PWD/:/ka-data/scripts/ \
      -d $KEEPALIVED_IMAGE \

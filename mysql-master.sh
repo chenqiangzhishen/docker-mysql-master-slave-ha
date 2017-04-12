@@ -56,7 +56,7 @@ sudo docker rm -f keepalived | true > /dev/null 2>&1
 sudo ip a | grep $VIP > /dev/null 2>&1
 [[ $? == 0 ]] && sudo ip a del $VIP dev $INTERFACE > /dev/null 2>&1
 
-sudo docker run --name=keepalived --restart=on-failure --log-driver=syslog \
+sudo docker run --name=keepalived --restart=on-failure \
      --net=host --privileged=true \
      --volume=$PWD/:/ka-data/scripts/ \
      -d $KEEPALIVED_IMAGE --master --override-check check-mysql-status.sh --enable-check --auth-pass pass --vrid 52 $INTERFACE 101 $VIP/24/$INTERFACE > /dev/null 2>&1
